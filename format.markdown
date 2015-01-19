@@ -6,10 +6,10 @@ Tento dokument má ukázat, jak si představuju, že bude fungovat formát, ve k
 Soubory
 -------
 
-Aplikace bude získávat data ve dvou souborech *(ke kterým se bude přistupovat dvěma HTTP požadavky)*. Na jejich názvu nezáleží, ale v tomto dokumentu jim budeme říkat `rozvrh.json` a `supl.json`.
+Aplikace bude získávat data ve dvou souborech *(na které se bude přistupovat dvěma HTTP požadavky)*. Na jejich názvu nezáleží, ale v tomto dokumentu jim budeme říkat `rozvrh.json` a `supl.json`.
 Oba soubory budou vždy obsahovat data pro celou školu, **nebude** se tedy používat nic jako `?trida=4.F`.
 
-* **`rozvrh.json`:** obsahuje seznam jednotlivých učitelů, tříd, místností atd. a především data s rozvrhy. Tento soubor se bude měnit jen když dojde k nějaké změně v rozvrhu (jednou za půl roku); může být na straně serveru cacheo-vaný. Soubor se stahuje jenom když dojde k jeho změně.
+* **`rozvrh.json`:** obsahuje seznam jednotlivých učitelů, tříd, místností atd. a především data s rozvrhy. Tento soubor se bude měnit jen když dojde k nějaké změně v rozvrhu (jednou za půl roku); může být na straně serveru cache-ovaný. Soubor se stahuje jenom, když dojde k jeho změně.
 * **`supl.json`:** obsahuje aktuální změny rozvrhu (suplování); mění se každou chvíli a **nesmí** být cache-ovaný *(někteří lidé jsou schopní o velké přestávce každou minutu mačkat refresh a aplikace, která jim ukáže hodinu stará data, je pro ně k ničemu; pokud ale budou na data čekat o pár milisekund déle, nikdo to nepozná)*. Také obsahuje informaci o tom, jestli došlo ke změně souboru `supl.json`.
 
 Aby se ušetřil přenos dat, budou tyto soubory k dispozici i v zagzipované verzi (každý vzlášť), takže budou celkem k dispozici 4 soubory: `rozvrh.json`, `rozvrh.json.gz`, `supl.json` a `supl.json.gz`.
@@ -23,7 +23,7 @@ Aby jsme se vyhnuli nepříjemnostem, **nebudeme** hodnotu `null` vůbec použí
 Položky souboru `rozvrh.json`
 -----------------------------
 
-Soubor je jeden velkej objekt s následujícíma položkama:
+Soubor je jeden velkej objekt s následujícími položkami:
 
 * **`classes`** - array, která obsahuje jednotlivé třídy a seznam skupin, na které je daná třída rozdělená. Záznam vypadá nějak takto:
 
@@ -78,16 +78,16 @@ Soubor je jeden velkej objekt s následujícíma položkama:
         ]
         
     V tomto příkladě se třída dělí různě na jazyky a na ostatní předměty *(jeden žák může chodit do skupiny 1 na anglický jazyk a do skupiny 2 na ostatní předměty)* a někteří žáci chodí na Cvičení z matematiky.  
-    Položka **`gid`** *(Group ID)* souží k jednoznačnému určení skupiny v rámci tohoto souboru a nikde se nezobrazuje. V rámci jedné třídy **musí** být hodnota `gid` unikátní a **nikdy** se nesmí rovnat nule (`0`). Není nutné položky číslovat od jedničky, nikdy však nesmí dojít k přečíslování hodnot, protože se jedná o jediný identifikátor skupin, které si aplikace ukládá.  
-    Pro ujasnění, v tomto příkladě si musí uživatel této aplikace vybrat tři skupiny, jednu z dvojice `[1, 2]`, druhou z `[3, 4]` a třetí z trojice `[5, 6]`. Proto musí být v tomto seznamu skupina s `gid=6`, i když se tato hodnota nikde nepoužívá, jinak by žák neměl jak zvolit, že nechodí na Cvičení z matematiky.
+    Položka **`gid`** *(Group ID)* souží k jednoznačnému určení skupiny v rámci tohoto souboru a nikde se nezobrazuje. V rámci jedné třídy **musí** být hodnota `gid` unikátní a **nikdy** se nesmí rovnat nule (`0`). Není nutné položky číslovat od jedničky, **nikdy však nesmí dojít k přečíslování hodnot**, protože se jedná o jediný identifikátor skupin, které si aplikace ukládá *(tj. informace, že žák ze 4.E chodí do skupiny s `gid=4` nesmí za rok změnit svůj význam)*.  
+    Pro ujasnění, v tomto příkladě si musí uživatel této aplikace vybrat tři skupiny, jednu z dvojice `[1, 2]`, druhou z `[3, 4]` a třetí z trojice `[5, 6]`. Proto musí být v tomto seznamu skupina s `gid=6`, i když se tato hodnota nikde nepoužívá, jinak by žák neměl způsob, jak zvolit, že nechodí na Cvičení z matematiky.
     
 * **`rooms`** - seznam všech místností na škole
 * **`teachers`** - seznam všech učitelů na škole
 * **`times`** - informace o tom, kdy která hodina začíná a kdy končí. Každá hodina obsahuje tyto položky:
 
-    **`num`** - pořadové číslo hodiny
-    **`start`** - začátek hodiny ve formátu `hh:mm`
-    **`end`** - konec hodiny ve formátu `hh:mm`
+    * **`num`** - pořadové číslo hodiny
+    * **`start`** - začátek hodiny ve formátu `hh:mm`
+    * **`end`** - konec hodiny ve formátu `hh:mm`
 
 * **`timetable`** - obsahuje záznamy o jednotlivých hodinách. Vzhledem k tomu, že se na tyto data lze dívat různě *(podle třídy, učitele, místnosti, ...)*, nejsou data nijak seřazena a představují jakousi databázi, kde jeden řádek odpovídá jedný vyučovací hodině. Nedochází tedy k duplicitě dat *(z rozvrhu všech tříd jde dopočítat rozvrhy všech učitelů)*. Jeden řádek obsahuje tyto záznamy *(sploupce)*:
 
@@ -97,13 +97,13 @@ Soubor je jeden velkej objekt s následujícíma položkama:
     * **`hour`** [int] - index do seznamu vyučovacích hodin uvedený výše
     * **`class`** [int] - index do seznamu tříd uvedený výše
     * **`room`** [int] - index do seznamu místností uvedený výše
-    * **`group`** [int] - pokud se tento předmět týká jen určitý skupiny, bude obsahovat `gid` této skupiny. V opačném případě bude nastaven na nulu (`0`), což znamená, že tento předmět má celá třída dohromady bez ohledu na skupiny.
-    * **`week`** [String] - zda se tento předmět vyučuje jen v sudé (`even`) nebo liché týdny (`odd`). Pokud není předmět omezen na sudé nebo liché týdne, bude hodnota rovna `both`.
+    * **`group`** [int] - pokud se tento předmět týká jen určitý skupiny, bude obsahovat `gid` této skupiny. V opačném případě bude nastaven na nulu (`0`), což znamená, že se třída na tento předmět na skupiny nědělí (má ho celá třída dohromady).
+    * **`week`** [String] - zda se tento předmět vyučuje jen v sudé (`even`) nebo liché (`odd`) týdny. Pokud není předmět omezen na sudé nebo liché týdny, bude hodnota rovna `both`.
 
 Položky souboru `supl.json`
 ---------------------------
 
-Soubor je jeden velkej objekt s následujícíma položkama:
+Soubor je jeden velkej objekt s následujícími položkami:
 
 * **`rozvrh_version`** - obsahuje číslo aktuální verze souboru `rozvrh.json`. Může jít o libovolný alfanumerický řetězec, který se změní vždy, když dojde ke změně souboru `rozvrh.json`. Může jít o datum jeho vytvoření, jeho hash, číslo, které se inkrementuje, nebo cokoliv jiného.
 * **`current_week`** - zda 1. den, který je ve výpisu suplování uveden, je podle třídnice sudý (`even`) nebo lichý (`odd`).
