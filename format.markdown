@@ -380,3 +380,22 @@ Ukázka souborů
         ]
       ]
     }
+
+Zpracování dat
+--------------
+
+Jeden ze způsobů jak zpracovat výše uvedená data, je uložit je do databáze. To umožní zobrazení těchto dat z různých pohledů *(třídy, učitele, místnosti,...)* bez nutnosti velkých změn v kódu *(stačí upravit část SQL dotazu za `WHERE`)*. Pokud se pro tuto variantu zpracování dat rozhodnete, bude struktura databáze vypadat následovně:
+
+![Struktura dat][1]
+
+Zkušební data
+-------------
+
+Protože ostrá data zatím nejsou k dispozici a času není nazbyt, přikládám odkazy, odkud je možné stáhnout falešná data pro testování aplikace. Tyto soubory jsou konstantí a obsahují totožná data jako výše uvedený přiklad.
+
+    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.json
+    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.json.gz
+    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json
+    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json.gz
+
+[1]: images/db.png
