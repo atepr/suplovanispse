@@ -34,6 +34,15 @@
         <p>Tato aplikace má za úkol zobrazit studentům <a href="http://www.spse.cz/">Střední průmyslové školy elektrotechnické v Pardubicích</a> jejich rozvrh, změny ve výuce a získané známky na chytrém mobilním telefonu s operačním systémem Android, iOS nebo Windows Phone. Tato aplikace je v současné době ve vývoji a bude mít za úkol posloužit jako maturitní projekt jejich trvůrců.</p>
 
 <h1>
+<a id="popis-aplikace" class="anchor" href="#popis-aplikace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Popis aplikace</h1>
+
+<p>Při prvním spuštění aplikace se žák přihlásí pomocí svého školního účtu na intranet. Aplikace rozpozná, do jaké chodí třídy a stáhne jeho rozvrh včetně jeho aktuálních změn, jeho známky a z těchto známek vypočítá průměr dle pravidel klasifikace. Po jejich stažení si aplikace tyto informace uloží do mezipaměti a umožní jejich pozdější zobrazení i bez internetového připojení. Pokud se nepřihlásí, aplikace načte rozvrhy všech tříd, učitelů a učeben a dá uživateli na výběr mezi všemi těmito rozvrhy. Aplikace stahuje rozvrhy a suplování ve formátu JSON a známky v serializovaném poli PHP.</p>
+
+<p>Řešitelé museli odposlechnout komunikaci školního intranetu, běžícího na technologii Flash, se serverem; zjistit, že se jedná o serializované pole vytvořené v jazyce PHP a následně zparsovat přijatá data (knihovnou nebo vlastním parserem - dle platformy). Z těchto dat řešitelé získávají známky a počítají z nich vážený průměr a zobrazí je (řešení dle platformy).</p>
+
+<p>Data rozvrhů a suplování získávají řešitelé od školy ve formátu určeným řešiteli (JSON, specifikace <a href="https://github.com/atepr/suplovanispse/blob/gh-pages/format.markdown">https://github.com/atepr/suplovanispse/blob/gh-pages/format.markdown</a>). Tato data aplikace zpracuje a následně zobrazí (řešení dle platformy).</p>
+
+<h1>
 <a id="funkce-aplikace" class="anchor" href="#funkce-aplikace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Funkce aplikace</h1>
 
 <ul>
@@ -79,8 +88,13 @@
 <ul>
 <li>Android verze 4.0 nebo vyšší</li>
 <li>iOS s jailbreakem (autor v současné době nevlastní vývojářský účet)</li>
-<li>Windows Phone 8.0, 8.1</li>
+<li>Windows Phone 8.0</li>
 </ul>
+
+<h1>
+<a id="závěr" class="anchor" href="#z%C3%A1v%C4%9Br" aria-hidden="true"><span class="octicon octicon-link"></span></a>Závěr</h1>
+
+<p>Předpokládáme, že tato aplikace zlepší studentům přístupnost k jejich klasifikaci, která byla, díky technologii Flash, používané na školním intranetu, nezobrazitelná na velké části mobilních telefonů a že aplikace usnadní žákům sledování změn ve výuce.</p>
 
 <h1>
 <a id="autoři" class="anchor" href="#auto%C5%99i" aria-hidden="true"><span class="octicon octicon-link"></span></a>Autoři</h1>
