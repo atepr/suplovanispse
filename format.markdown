@@ -95,7 +95,7 @@ Soubor je jeden velkej objekt s následujícími položkami:
     * **`subject`** [String] - zkratka předmětu, např. "ČJ"
     * **`day`** [int] - číslo dne v týdnu (1=pondělí, 5=pátek)
     * **`hour`** [int] - index do seznamu vyučovacích hodin uvedený výše
-    * **`class`** [int] - index do seznamu tříd uvedený výše
+    * **`classId`** [int] - index do seznamu tříd uvedený výše
     * **`room`** [int] - index do seznamu místností uvedený výše
     * **`group`** [int] - pokud se tento předmět týká jen určitý skupiny, bude obsahovat `gid` této skupiny. V opačném případě bude nastaven na nulu (`0`), což znamená, že se třída na tento předmět na skupiny nědělí (má ho celá třída dohromady).
     * **`week`** [String] - zda se tento předmět vyučuje jen v sudé (`even`) nebo liché (`odd`) týdny. Pokud není předmět omezen na sudé nebo liché týdny, bude hodnota rovna `both`.
@@ -305,7 +305,7 @@ Ukázka souborů
           "subject": "MS",
           "day": 1,
           "hour": 0,
-          "class": 2,
+          "classId": 2,
           "room": 2,
           "group": 0,
           "week": "both"
@@ -315,7 +315,7 @@ Ukázka souborů
           "subject": "MS",
           "day": 1,
           "hour": 1,
-          "class": 2,
+          "classId": 2,
           "room": 2,
           "group": 0,
           "week": "both"
@@ -325,7 +325,7 @@ Ukázka souborů
           "subject": "MS",
           "day": 1,
           "hour": 2,
-          "class": 2,
+          "classId": 2,
           "room": 2,
           "group": 0,
           "week": "both"
@@ -335,7 +335,7 @@ Ukázka souborů
           "subject": "SV",
           "day": 1,
           "hour": 3,
-          "class": 2,
+          "classId": 2,
           "room": 3,
           "group": 0,
           "week": "both"
@@ -353,7 +353,7 @@ Ukázka souborů
         [
           {
             "hour": 3,
-            "class": 2,
+            "classId": 2,
             "subject": "",
             "teacher": 0,
             "room": 0,
@@ -363,7 +363,7 @@ Ukázka souborů
         [
           {
             "hour": 0,
-            "class": 2,
+            "classId": 2,
             "subject": "PS",
             "teacher": 7,
             "room": 1,
@@ -371,7 +371,7 @@ Ukázka souborů
           },
           {
             "hour": 1,
-            "class": 2,
+            "classId": 2,
             "subject": "PS",
             "teacher": 7,
             "room": 1,
