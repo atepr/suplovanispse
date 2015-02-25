@@ -49,7 +49,7 @@ Aplikace poběží na mobilní telefonu s jedním z níže uvedených operační
 
 * Android verze 4.0 nebo vyšší
 * iOS
-* Windows Phone 8.0
+* Windows Phone 8.0, 8.1
 
 Závěr
 =====
