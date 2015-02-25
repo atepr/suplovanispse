@@ -398,4 +398,4 @@ Protože ostrá data zatím nejsou k dispozici a času není nazbyt, přikládá
     https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json
     https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json.gz
 
-[1]: images/db.png
+[1]: data/db.png
