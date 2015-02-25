@@ -1,3 +1,7 @@
+---
+title: Datový formát pro suplování a rozvrh
+---
+
 Formát pro suplování a rozvrh
 =============================
 
