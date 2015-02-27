@@ -29,64 +29,6 @@ Položky souboru `rozvrh.json`
 
 Soubor je jeden velkej objekt s následujícími položkami:
 
-* **`classes`** - array, která obsahuje jednotlivé třídy a seznam skupin, na které je daná třída rozdělená. Záznam vypadá nějak takto:
-
-        {
-          "name": "4.F",
-          "groups": [array]
-        }
-        
-    Pole `groups` pak bude obsahovat pole s jednotlivými kritériemy, podle kterých se pak skupina rozděluje.
-    Celé pole `groups` může vypadat třeba takto:
-    
-        "groups": [
-          {
-            "name": "Jazyky",
-            "options": [
-              {
-                "gid": 1,
-                "name": "Skupina 1"
-              },
-              {
-                "gid": 2,
-                "name": "Skupina 2"
-              }
-            ]
-          },
-          {
-            "name": "Odborné předměty",
-            "options": [
-              {
-                "gid": 3,
-                "name": "Skupina 1"
-              },
-              {
-                "gid": 4,
-                "name": "Skupina 2"
-              }
-            ]
-          },
-          {
-            "name": "Cvičení z matematiky",
-            "options": [
-              {
-                "gid": 5,
-                "name": "Ano"
-              },
-              {
-                "gid": 6,
-                "name": "Ne"
-              }
-            ]
-          }
-        ]
-        
-    V tomto příkladě se třída dělí různě na jazyky a na ostatní předměty *(jeden žák může chodit do skupiny 1 na anglický jazyk a do skupiny 2 na ostatní předměty)* a někteří žáci chodí na Cvičení z matematiky.  
-    Položka **`gid`** *(Group ID)* souží k jednoznačnému určení skupiny v rámci tohoto souboru a nikde se nezobrazuje. V rámci jedné třídy **musí** být hodnota `gid` unikátní a **nikdy** se nesmí rovnat nule (`0`). Není nutné položky číslovat od jedničky, **nikdy však nesmí dojít k přečíslování hodnot**, protože se jedná o jediný identifikátor skupin, které si aplikace ukládá *(tj. informace, že žák ze 4.E chodí do skupiny s `gid=4` nesmí za rok změnit svůj význam)*.  
-    Pro ujasnění, v tomto příkladě si musí uživatel této aplikace vybrat tři skupiny, jednu z dvojice `[1, 2]`, druhou z `[3, 4]` a třetí z trojice `[5, 6]`. Proto musí být v tomto seznamu skupina s `gid=6`, i když se tato hodnota nikde nepoužívá, jinak by žák neměl způsob, jak zvolit, že nechodí na Cvičení z matematiky.
-    
-* **`rooms`** - seznam všech místností na škole
-* **`teachers`** - seznam všech učitelů na škole
 * **`times`** - informace o tom, kdy která hodina začíná a kdy končí. Každá hodina obsahuje tyto položky:
 
     * **`num`** - pořadové číslo hodiny
@@ -95,13 +37,13 @@ Soubor je jeden velkej objekt s následujícími položkami:
 
 * **`timetable`** - obsahuje záznamy o jednotlivých hodinách. Vzhledem k tomu, že se na tyto data lze dívat různě *(podle třídy, učitele, místnosti, ...)*, nejsou data nijak seřazena a představují jakousi databázi, kde jeden řádek odpovídá jedný vyučovací hodině. Nedochází tedy k duplicitě dat *(z rozvrhu všech tříd jde dopočítat rozvrhy všech učitelů)*. Jeden řádek obsahuje tyto záznamy *(sploupce)*:
 
-    * **`teacher`** [int] - index do seznamu učitelů uvedený výše
-    * **`subject`** [String] - zkratka předmětu, např. "ČJ"
+    * **`teacher`** [String] - jméno učitele
+    * **`subject`** [String] - zkratka předmětu, např. `ČJ`
     * **`day`** [int] - číslo dne v týdnu (1=pondělí, 5=pátek)
     * **`hour`** [int] - index do seznamu vyučovacích hodin uvedený výše
-    * **`classId`** [int] - index do seznamu tříd uvedený výše
-    * **`room`** [int] - index do seznamu místností uvedený výše
-    * **`group`** [int] - pokud se tento předmět týká jen určitý skupiny, bude obsahovat `gid` této skupiny. V opačném případě bude nastaven na nulu (`0`), což znamená, že se třída na tento předmět na skupiny nědělí (má ho celá třída dohromady).
+    * **`class_name`** [String] - jméno třídy, např. `4.F`. Mezi tečkou a písmenem není žádná mezera.
+    * **`room`** [String] - jméno místnosti, např. `B130`
+    * **`group`** [String] - pokud je tento předmět rozdělen na skupiny, bude zde identifikátor skupiny, které se předmět týká. V opačném případě bude nastaven na *prázdný řetězec* (`""`), což znamená, že se třída na tento předmět na skupiny nědělí (má ho celá třída dohromady). Identifikátory skupin nemusí být unikátní.
     * **`week`** [String] - zda se tento předmět vyučuje jen v sudé (`even`) nebo liché (`odd`) týdny. Pokud není předmět omezen na sudé nebo liché týdny, bude hodnota rovna `both`.
 
 Položky souboru `supl.json`
@@ -109,10 +51,8 @@ Položky souboru `supl.json`
 
 Soubor je jeden velkej objekt s následujícími položkami:
 
-* **`rozvrh_version`** - obsahuje číslo aktuální verze souboru `rozvrh.json`. Může jít o libovolný alfanumerický řetězec, který se změní vždy, když dojde ke změně souboru `rozvrh.json`. Může jít o datum jeho vytvoření, jeho hash, číslo, které se inkrementuje, nebo cokoliv jiného.
-* **`current_week`** - zda 1. den, který je ve výpisu suplování uveden, je podle třídnice sudý (`even`) nebo lichý (`odd`).
-* **`supl_first_day`** - unixový timestamp prvního dne, který je ve výpisu uveden
-* **`changes`** - obsahuje záznamy o jednotlivých změnách ve stylu položky `timetable` v souboru `rozvrh.json`. Pokud dojde k odpadnutí předmětu, nastaví hodnota `subject` na prázdný řetězec (`""`), a hodnoty `teacher`, `room` a `group` na nulu (`0`).
+* **`timetable_version`** - obsahuje číslo aktuální verze souboru `rozvrh.json`. Může jít o libovolný alfanumerický řetězec, který se změní vždy, když dojde ke změně souboru `rozvrh.json`. Může jít o datum jeho vytvoření, jeho hash, číslo, které se inkrementuje, nebo cokoliv jiného.
+* **`changes`** - objekt, který obsahuje změny v rovrhu pro jednotlivé dny. Formát klíče je `1234567890W`, kde `1234567890` je unixový timestamp dne, kterého se změny týkají a znak `W` označuje, zda se jedná o sudý (`E`) nebo lichý (`O`) týden. Hodnoty objektu jsou podobné jako v položce `timetable` v souboru `rozvrh.json`. Pokud dojde k odpadnutí předmětu, nastaví hodnoty `subject`, `teacher`, `room` na prázdný řetězec (`""`). Pokud dojde k zveřejnění rozvrhu a celá škola v daný den nemá žádnou změnu, bude hodnotou objektu pro tento den prázdné pole (`[]`).
 
 Ukázka souborů
 --------------
@@ -120,227 +60,101 @@ Ukázka souborů
 ### rozvrh.json
 
     {
-      "classes": [
-        {
-          "name": "4.D",
-          "groups": [
-            {
-              "name": "Jazyky",
-              "options": [
-                {
-                  "gid": 1,
-                  "name": "Skupina 1"
-                },
-                {
-                  "gid": 2,
-                  "name": "Skupina 3"
-                },
-                {
-                  "gid": 3,
-                  "name": "Skupina 4"
-                }
-              ]
-            },
-            {
-              "name": "Odborné předměty",
-              "options": [
-                {
-                  "gid": 4,
-                  "name": "Skupina 1"
-                },
-                {
-                  "gid": 5,
-                  "name": "Skupina 2"
-                }
-              ]
-            },
-            {
-              "name": "Cvičení z matematiky",
-              "options": [
-                {
-                  "gid": 6,
-                  "name": "Ano"
-                },
-                {
-                  "gid": 7,
-                  "name": "Ne"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "4.E",
-          "groups": [
-            {
-              "name": "Jazyky",
-              "options": [
-                {
-                  "gid": 1,
-                  "name": "Skupina 1"
-                },
-                {
-                  "gid": 2,
-                  "name": "Skupina 2"
-                }
-              ]
-            },
-            {
-              "name": "Odborné předměty",
-              "options": [
-                {
-                  "gid": 3,
-                  "name": "Skupina 1"
-                },
-                {
-                  "gid": 4,
-                  "name": "Skupina 2"
-                }
-              ]
-            },
-            {
-              "name": "Cvičení z matematiky",
-              "options": [
-                {
-                  "gid": 5,
-                  "name": "Ano"
-                },
-                {
-                  "gid": 6,
-                  "name": "Ne"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "4.F",
-          "groups": [
-            {
-              "name": "Cvičení z matematiky",
-              "options": [
-                {
-                  "gid": 1,
-                  "name": "Ano"
-                },
-                {
-                  "gid": 2,
-                  "name": "Ne"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "rooms": [
-        "B130",
-        "C113",
-        "D055",
-        "B305",
-        "TV"
-      ],
-      "teachers": [
-        "Albrechtová Marie",
-        "Ćernoch Milan",
-        "Venzara Robert",
-        "Forejtová Jaroslava",
-        "Jelínek Radek",
-        "Petera Martin",
-        "Koucký Miroslav",
-        "Přívratský Zdeněk",
-        "Machačová Kateřina",
-        "Kutálek Michal"
-      ],
       "times": [
         {
-          "num": 1,
+          "num": "0",
+          "start": "7:10",
+          "end": "7:55"
+        },
+        {
+          "num": "1",
           "start": "8:00",
           "end": "8:45"
         },
         {
-          "num": 2,
+          "num": "2",
           "start": "8:50",
           "end": "9:35"
         },
         {
-          "num": 3,
+          "num": "3",
           "start": "9:45",
           "end": "10:30"
         },
         {
-          "num": 4,
+          "num": "4",
           "start": "10:50",
           "end": "11:35"
         },
         {
-          "num": 5,
+          "num": "5",
           "start": "11:45",
           "end": "12:30"
         },
         {
-          "num": 6,
+          "num": "6",
           "start": "12:35",
           "end": "13:20"
         },
         {
-          "num": 7,
+          "num": "7",
           "start": "13:25",
           "end": "14:10"
         },
         {
-          "num": 8,
+          "num": "8",
           "start": "14:15",
           "end": "15:00"
         },
         {
-          "num": 9,
+          "num": "9",
           "start": "15:05",
           "end": "15:50"
         },
         {
-          "num": 10,
+          "num": "10",
           "start": "15:55",
           "end": "16:40"
         }
       ],
       "timetable": [
         {
-          "teacher": 5,
-          "subject": "MS",
-          "day": 1,
-          "hour": 0,
-          "classId": 2,
-          "room": 2,
-          "group": 0,
-          "week": "both"
-        },
-        {
-          "teacher": 5,
+          "teacher": "Martin Petera",
           "subject": "MS",
           "day": 1,
           "hour": 1,
-          "classId": 2,
-          "room": 2,
-          "group": 0,
+          "class_name": "4.F",
+          "room": "D055",
+          "group": "",
           "week": "both"
         },
         {
-          "teacher": 5,
+          "teacher": "Martin Petera",
           "subject": "MS",
           "day": 1,
           "hour": 2,
-          "classId": 2,
-          "room": 2,
-          "group": 0,
+          "class_name": "4.F",
+          "room": "D055",
+          "group": "",
           "week": "both"
         },
         {
-          "teacher": 8,
-          "subject": "SV",
+          "teacher": "Martin Petera",
+          "subject": "MS",
           "day": 1,
           "hour": 3,
-          "classId": 2,
-          "room": 3,
+          "class_name": "4.F",
+          "room": "D055",
+          "group": "",
+          "week": "both"
+        },
+        {
+          "teacher": "Sobolová Zdeňka",
+          "subject": "SV",
+          "day": 1,
+          "hour": 4,
+          "class_name": "4.F",
+          "room": "B305",
           "group": 0,
           "week": "both"
         }
@@ -350,56 +164,48 @@ Ukázka souborů
 ### supl.json
 
     {
-      "rozvrh_version": "123abc",
-      "current_week": "even",
-      "supl_first_day": 1421625600,
-      "changes": [
-        [
+      "timetable_version": "123abc",
+      "changes": {
+        "1425340800E": [
           {
-            "hour": 3,
-            "classId": 2,
-            "subject": "",
-            "teacher": 0,
-            "room": 0,
+            "hour": 1,
+            "class_name": "4.F",
+            "subject": "PS",
+            "teacher": "Přívratský Zdeněk",
+            "room": "C113",
             "group": 0
           }
         ],
-        [
+        "1425427200E": [
           {
-            "hour": 0,
-            "classId": 2,
-            "subject": "PS",
-            "teacher": 7,
-            "room": 1,
+            "hour": 1,
+            "class_name": "4.F",
+            "subject": "",
+            "teacher": "",
+            "room": "",
             "group": 0
           },
           {
-            "hour": 1,
-            "classId": 2,
-            "subject": "PS",
-            "teacher": 7,
-            "room": 1,
+            "hour": 2,
+            "class_name": "4.F",
+            "subject": "AJ",
+            "teacher": "Albrechtová Marie",
+            "room": "B130",
             "group": 0
           }
-        ]
-      ]
+        ],
+        "1425513600E": []
+      }
     }
-
-Zpracování dat
---------------
-
-Jeden ze způsobů jak zpracovat výše uvedená data, je uložit je do databáze. To umožní zobrazení těchto dat z různých pohledů *(třídy, učitele, místnosti,...)* bez nutnosti velkých změn v kódu *(stačí upravit část SQL dotazu za `WHERE`)*. Pokud se pro tuto variantu zpracování dat rozhodnete, bude struktura databáze vypadat následovně:
-
-![Struktura dat][1]
 
 Zkušební data
 -------------
 
-Protože ostrá data zatím nejsou k dispozici a času není nazbyt, přikládám odkazy, odkud je možné stáhnout falešná data pro testování aplikace. Tyto soubory jsou konstantí a obsahují totožná data jako výše uvedený přiklad.
+Protože ostrá data zatím nejsou k dispozici a času není nazbyt, přikládám odkazy, odkud je možné stáhnout falešná data pro testování aplikace. Tyto soubory jsou konstantí a obsahují podobná data jako výše uvedený přiklad.
 
-    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.json
-    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.json.gz
-    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json
-    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.json.gz
+    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.v2.json
+    https://dl.dropboxusercontent.com/u/39997832/matpr/rozvrh.v2.json.gz
+    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.v2.json
+    https://dl.dropboxusercontent.com/u/39997832/matpr/supl.v2.json.gz
 
 [1]: data/db.png
