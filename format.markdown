@@ -155,7 +155,7 @@ Ukázka souborů
           "hour": 4,
           "class_name": "4.F",
           "room": "B305",
-          "group": 0,
+          "group": "",
           "week": "both"
         }
       ]
@@ -173,7 +173,7 @@ Ukázka souborů
             "subject": "PS",
             "teacher": "Přívratský Zdeněk",
             "room": "C113",
-            "group": 0
+            "group": ""
           }
         ],
         "1425427200E": [
@@ -183,7 +183,7 @@ Ukázka souborů
             "subject": "",
             "teacher": "",
             "room": "",
-            "group": 0
+            "group": ""
           },
           {
             "hour": 2,
@@ -191,7 +191,7 @@ Ukázka souborů
             "subject": "AJ",
             "teacher": "Albrechtová Marie",
             "room": "B130",
-            "group": 0
+            "group": ""
           }
         ],
         "1425513600E": []
