@@ -59,7 +59,7 @@ Vysvětlení *se přidá známka* a *se sníží/zvýší výsledná známka o*
 -----------------------------------------------------------------
 
 * ***Se přidá známka*** funguje tak, že se vytvoří nová virtuální skupina s váhou, jakou měla původní skupina a v ní bude jediná známka pode toho, jaká znáka se měla přidat.
-* ***se sníží/zvýší výsledná známka o*** funguje tak, jak by se dalo čekat. Nemá to však vliv na průměr skupiny, ale na až výslednou známku z předmětu. Také je zde logické omezení, že nejlíp můžete dostat jedničku a nejhůře pětku.
+* ***Se sníží/zvýší výsledná známka o*** funguje tak, jak by se dalo čekat. Nemá to však vliv na průměr skupiny, ale na až výslednou známku z předmětu. Také je zde logické omezení, že nejlíp můžete dostat jedničku a nejhůře pětku.
 
 Zní to složitě, ale následující příklad to snad objasní.
 
@@ -106,7 +106,7 @@ Postup výpočtu průměru je náledující:
     1     | 2.6
     2     | 4.2
 
-2. Zkontroluje se pravidlo *pokud je počet pětek roven 4*. To je splněno, takže se do naší tabulky *přidá se známka 5*:
+2. Zkontroluje se pravidlo *pokud je počet pětek roven 4*. To je splněno, takže se do naší tabulky *přidá známka 5*:
 
     Váha  | Hodnota
     ------|---------
@@ -114,7 +114,7 @@ Postup výpočtu průměru je náledující:
     2     | 4.2
     **1** | **5**
 
-3. Zkontroluje se pravidlo *pokud je počet jedniček roven 2*. To je splněno hned dvakrát, takže se do naší tabulky **dvakrát** *přidá se známka 1*:
+3. Zkontroluje se pravidlo *pokud je počet jedniček roven 2*. To je splněno hned dvakrát, takže se do naší tabulky **dvakrát** *přidá známka 1*:
     
     Váha  | Hodnota
     ------|---------
@@ -124,7 +124,7 @@ Postup výpočtu průměru je náledující:
     **1** | **1**
     **1** | **1**
     
-4. Nyní je na řadě pravidlo *pokud je průměr roven 3*. Na všechny řádky, které jsme přidali v bodech 2 a 3 se kašle a vezme se první průměr, co jsme vypočítali, tj. `2.60`. Ten zaokrouhlíme na celá čísla (to je `3`) a pravidlo je splněno. Budeme si pamatovat, že časem budeme výslednou známku **zvyšovat o 1**. Zatím ale neděláme nic.
+4. Nyní je na řadě pravidlo *pokud je průměr roven 3*. Na všechny řádky, které jsme přidali v bodech 2 a 3, se kašle a vezme se první průměr, co jsme vypočítali, tj. `2.60`. Ten zaokrouhlíme na celá čísla (to je `3`) a pravidlo je splněno. Budeme si pamatovat, že časem budeme výslednou známku **zvyšovat o 1**. Zatím ale neděláme nic.
 
 5. A dostáváme se k prvnímu pravidlu u skupiny B. To splněno není, takže ani nebudeme nic dělat.
 6. Pravidlo *pokud je počet čtyřek roven 2* už zase splněno je *(jednou)*, takže do naší tabulky *přidáme čtyřku*. Jsme ale ve skupině `B`, která má váhu `2`, takže přidaná známka bude mít v naší tabulce taky váhu `2`:
@@ -139,7 +139,7 @@ Postup výpočtu průměru je náledující:
     **2** | **4**
 
 7. Dále je na řadě pravidlo *pokud je počet pětek roven 1, sníží se výsledná známka o 2*. To je sice splněno pětkrát, ale opakování se týká jen pravidel, která *přidávají* známku (4. znak je `a`). Takže si zapamatujeme, že časem budeme výslednou známku **snižovat o 2**, ale jenom jednou.
-8. Pravidlo *pokud je průměr roven 4* je splněno *(jenou, víckrát to nejde)*, takže do naší tabulky se *přidá se známka 4*:
+8. Pravidlo *pokud je průměr roven 4* je rovněž splněno *(jenou, víckrát to nejde)*, takže se do naší tabulky *přidá se známka 4*:
 
     Váha  | Hodnota
     ------|---------
