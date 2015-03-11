@@ -67,5 +67,6 @@ Dokumenty
 =========
 
 * [Návrh datového formátu pro suplování a rozvrh](format)
+* [Vysvětlení pravidel na intranetu](intranet-pravidla)
 
 [1]: http://www.spse.cz/
