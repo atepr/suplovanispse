@@ -59,144 +59,148 @@ Ukázka souborů
 
 ### rozvrh.json
 
+```json
+{
+  "times": [
     {
-      "times": [
-        {
-          "num": "0",
-          "start": "7:10",
-          "end": "7:55"
-        },
-        {
-          "num": "1",
-          "start": "8:00",
-          "end": "8:45"
-        },
-        {
-          "num": "2",
-          "start": "8:50",
-          "end": "9:35"
-        },
-        {
-          "num": "3",
-          "start": "9:45",
-          "end": "10:30"
-        },
-        {
-          "num": "4",
-          "start": "10:50",
-          "end": "11:35"
-        },
-        {
-          "num": "5",
-          "start": "11:45",
-          "end": "12:30"
-        },
-        {
-          "num": "6",
-          "start": "12:35",
-          "end": "13:20"
-        },
-        {
-          "num": "7",
-          "start": "13:25",
-          "end": "14:10"
-        },
-        {
-          "num": "8",
-          "start": "14:15",
-          "end": "15:00"
-        },
-        {
-          "num": "9",
-          "start": "15:05",
-          "end": "15:50"
-        },
-        {
-          "num": "10",
-          "start": "15:55",
-          "end": "16:40"
-        }
-      ],
-      "timetable": [
-        {
-          "teacher": "Martin Petera",
-          "subject": "MS",
-          "day": 1,
-          "hour": 1,
-          "class_name": "4.F",
-          "room": "D055",
-          "group": "",
-          "week": "both"
-        },
-        {
-          "teacher": "Martin Petera",
-          "subject": "MS",
-          "day": 1,
-          "hour": 2,
-          "class_name": "4.F",
-          "room": "D055",
-          "group": "",
-          "week": "both"
-        },
-        {
-          "teacher": "Martin Petera",
-          "subject": "MS",
-          "day": 1,
-          "hour": 3,
-          "class_name": "4.F",
-          "room": "D055",
-          "group": "",
-          "week": "both"
-        },
-        {
-          "teacher": "Sobolová Zdeňka",
-          "subject": "SV",
-          "day": 1,
-          "hour": 4,
-          "class_name": "4.F",
-          "room": "B305",
-          "group": "",
-          "week": "both"
-        }
-      ]
+      "num": "0",
+      "start": "7:10",
+      "end": "7:55"
+    },
+    {
+      "num": "1",
+      "start": "8:00",
+      "end": "8:45"
+    },
+    {
+      "num": "2",
+      "start": "8:50",
+      "end": "9:35"
+    },
+    {
+      "num": "3",
+      "start": "9:45",
+      "end": "10:30"
+    },
+    {
+      "num": "4",
+      "start": "10:50",
+      "end": "11:35"
+    },
+    {
+      "num": "5",
+      "start": "11:45",
+      "end": "12:30"
+    },
+    {
+      "num": "6",
+      "start": "12:35",
+      "end": "13:20"
+    },
+    {
+      "num": "7",
+      "start": "13:25",
+      "end": "14:10"
+    },
+    {
+      "num": "8",
+      "start": "14:15",
+      "end": "15:00"
+    },
+    {
+      "num": "9",
+      "start": "15:05",
+      "end": "15:50"
+    },
+    {
+      "num": "10",
+      "start": "15:55",
+      "end": "16:40"
     }
+  ],
+  "timetable": [
+    {
+      "teacher": "Martin Petera",
+      "subject": "MS",
+      "day": 1,
+      "hour": 1,
+      "class_name": "4.F",
+      "room": "D055",
+      "group": "",
+      "week": "both"
+    },
+    {
+      "teacher": "Martin Petera",
+      "subject": "MS",
+      "day": 1,
+      "hour": 2,
+      "class_name": "4.F",
+      "room": "D055",
+      "group": "",
+      "week": "both"
+    },
+    {
+      "teacher": "Martin Petera",
+      "subject": "MS",
+      "day": 1,
+      "hour": 3,
+      "class_name": "4.F",
+      "room": "D055",
+      "group": "",
+      "week": "both"
+    },
+    {
+      "teacher": "Sobolová Zdeňka",
+      "subject": "SV",
+      "day": 1,
+      "hour": 4,
+      "class_name": "4.F",
+      "room": "B305",
+      "group": "",
+      "week": "both"
+    }
+  ]
+}
+```
     
 ### supl.json
 
-    {
-      "timetable_version": "123abc",
-      "changes": {
-        "1425340800E": [
-          {
-            "hour": 1,
-            "class_name": "4.F",
-            "subject": "PS",
-            "teacher": "Přívratský Zdeněk",
-            "room": "C113",
-            "group": ""
-          }
-        ],
-        "1425427200E": [
-          {
-            "hour": 1,
-            "class_name": "4.F",
-            "subject": "",
-            "teacher": "",
-            "room": "",
-            "group": ""
-          },
-          {
-            "hour": 2,
-            "class_name": "4.F",
-            "subject": "AJ",
-            "teacher": "Albrechtová Marie",
-            "room": "B130",
-            "group": ""
-          }
-        ],
-        "1425513600E": []
+```json
+{
+  "timetable_version": "123abc",
+  "changes": {
+    "1425340800E": [
+      {
+        "hour": 1,
+        "class_name": "4.F",
+        "subject": "PS",
+        "teacher": "Přívratský Zdeněk",
+        "room": "C113",
+        "group": ""
       }
-    }
+    ],
+    "1425427200E": [
+      {
+        "hour": 1,
+        "class_name": "4.F",
+        "subject": "",
+        "teacher": "",
+        "room": "",
+        "group": ""
+      },
+      {
+        "hour": 2,
+        "class_name": "4.F",
+        "subject": "AJ",
+        "teacher": "Albrechtová Marie",
+        "room": "B130",
+        "group": ""
+      }
+    ],
+    "1425513600E": []
+  }
+}
+```
 
 Zkušební data
 -------------
