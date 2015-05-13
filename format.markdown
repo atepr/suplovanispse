@@ -59,7 +59,7 @@ Ukázka souborů
 
 ### rozvrh.json
 
-{% highlight json %}
+```json
 {
   "times": [
     {
@@ -161,11 +161,11 @@ Ukázka souborů
     }
   ]
 }
-{% endhighlight %}
+```
     
 ### supl.json
 
-~~~ json
+```json
 {
   "timetable_version": "123abc",
   "changes": {
@@ -200,7 +200,7 @@ Ukázka souborů
     "1425513600E": []
   }
 }
-~~~
+```
 
 Zkušební data
 -------------
