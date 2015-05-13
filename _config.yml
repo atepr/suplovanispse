@@ -4,5 +4,6 @@ defaults:
       path: ""
     values:
       layout: "main"
+    markdown: KramdownPygments
     kramdown:
       input: GFM
