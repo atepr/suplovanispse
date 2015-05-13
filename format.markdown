@@ -59,7 +59,7 @@ Ukázka souborů
 
 ### rozvrh.json
 
-```json
+{% highlight json %}
 {
   "times": [
     {
@@ -161,7 +161,7 @@ Ukázka souborů
     }
   ]
 }
-```
+{% endhighlight %}
     
 ### supl.json
 
