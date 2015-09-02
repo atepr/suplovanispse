@@ -153,7 +153,7 @@ Postup výpočtu průměru je náledující:
 
 9. Nyní již klasickým váženým průměrem vypočítáme, že výsledá známka je:
 
-    > *(2.6 + 2 * 4.2 + 5 + 1 + 1 + 2 * 4 + 2 * 4) ÷ (1 + 2 + 1 + 1 + 1 + 2 + 2) = **3,40***
+    > _(2.6 + 2 * 4.2 + 5 + 1 + 1 + 2 * 4 + 2 * 4) ÷ (1 + 2 + 1 + 1 + 1 + 2 + 2) = **3,40**_
 
 10. To není vše, protože si z bodů 4 a 7 pamatuje, že výslednou známku budeme:
 
