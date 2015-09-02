@@ -70,7 +70,7 @@ Máme dvě skupiny, `A` a `B`.
 
 Skupina `A` má váhu `1` a tyto pravidla:
 
-* Pokud je počet pětek roven 4, přidá se známka 5 (`5=4a5`).
+* Pokud je počet pětek roven 3, přidá se známka 5 (`5=3a5`).
 * Pokud je počet jedniček roven 2, přidá se známka 1 (`1=2a1`).
 * Pokud je průměr roven 3, zvýší se výsledná známka o 1 (`p=3u1`).
 
@@ -106,7 +106,7 @@ Postup výpočtu průměru je náledující:
     1     | 2.6
     2     | 4.2
 
-2. Zkontroluje se pravidlo *pokud je počet pětek roven 4*. To je splněno, takže se do naší tabulky *přidá známka 5*:
+2. Zkontroluje se pravidlo *pokud je počet pětek roven 3*. To je splněno, takže se do naší tabulky *přidá známka 5*:
 
     Váha  | Hodnota
     ------|---------
